@@ -2,9 +2,8 @@ name: Train Model on Kaggle
 
 on:
   push:
-    paths:
-      - 'dataset.json'
-      - 'train.ipynb'
+    branches:
+      - main
 
 jobs:
   deploy-to-kaggle:
