@@ -35,8 +35,8 @@ jobs:
           # Replace 'main' with the actual commit SHA to bypass cache
           sed -i "s/main\/dataset.json/${{ github.sha }}\/dataset.json/g" train.ipynb
           
-          # Push the kernel to Kaggle and request a T4 GPU
-          kaggle kernels push -p . --accelerator NvidiaTeslaT4
+          # Push the kernel to Kaggle
+          kaggle kernels push -p .
           
           echo "Waiting for Kaggle kernel to queue..."
           sleep 30
