@@ -1,0 +1,50 @@
+name: Train Model on Kaggle
+
+on:
+  push:
+    paths:
+      - 'dataset.json'
+      - 'train.ipynb'
+
+jobs:
+  deploy-to-kaggle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Kaggle API
+        run: pip install kaggle
+
+      - name: Trigger Kaggle Notebook
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          # Replace 'main' with the actual commit SHA to bypass cache and use correct version
+          sed -i "s/main\/dataset.json/${{ github.sha }}\/dataset.json/g" train.ipynb
+          
+          # Push the kernel to Kaggle
+          kaggle kernels push -p .
+          
+          echo "Waiting for Kaggle kernel to queue..."
+          sleep 30
+          
+          # Poll the status of the Kaggle kernel
+          while true; do
+            STATUS=$(kaggle kernels status youmei1/deaize-training-infrastructure)
+            echo "$STATUS"
+            if [[ "$STATUS" == *"complete"* ]]; then
+              echo "Kernel finished successfully."
+              exit 0
+            elif [[ "$STATUS" == *"error"* || "$STATUS" == *"cancel"* || "$STATUS" == *"fatal"* ]]; then
+              echo "Kernel failed or was cancelled!"
+              exit 1
+            fi
+            sleep 60
+          done
