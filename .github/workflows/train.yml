@@ -22,13 +22,14 @@ jobs:
 
       - name: Trigger Kaggle Notebook
         env:
-          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
         run: |
           # Ensure the config directory exists
           mkdir -p ~/.kaggle
           
-          # Create a valid kaggle.json using the username and the KGAT token as the key
-          echo "{\"username\":\"youmei1\",\"key\":\"$KAGGLE_API_TOKEN\"}" > ~/.kaggle/kaggle.json
+          # Create a valid kaggle.json using the username and the key
+          echo "{\"username\":\"${KAGGLE_USERNAME:-youmei1}\",\"key\":\"$KAGGLE_KEY\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
           
           # Replace 'main' with the actual commit SHA to bypass cache
