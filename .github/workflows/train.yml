@@ -25,6 +25,12 @@ jobs:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
         run: |
+          # Ensure the config directory exists
+          mkdir -p ~/.kaggle
+          
+          # Create kaggle.json
+          echo "{\"username\":\"${KAGGLE_USERNAME}\",\"key\":\"${KAGGLE_KEY}\"}" > ~/.kaggle/kaggle.json
+          chmod 600 ~/.kaggle/kaggle.json
           
           # Replace 'main' with the actual commit SHA to bypass cache
           sed -i "s/main\/dataset.json/${{ github.sha }}\/dataset.json/g" train.ipynb
