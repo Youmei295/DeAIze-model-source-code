@@ -1,6 +1,6 @@
 {
     "id": "youmei1/deaize-training-infrastructure",
-    "title": "deAIze-training infrastructure",
+    "title": "deaize-training-infrastructure",
     "code_file": "train.ipynb",
     "language": "python",
     "kernel_type": "notebook",
