@@ -18,19 +18,12 @@ jobs:
           python-version: '3.10'
 
       - name: Install Kaggle API
-        run: pip install kaggle
+        run: pip install kaggle --upgrade --pre
 
       - name: Trigger Kaggle Notebook
         env:
           KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
         run: |
-          # Ensure the config directory exists
-          mkdir -p ~/.kaggle
-          
-          # Create the kaggle.json file from the secret token
-          echo "$KAGGLE_API_TOKEN" > ~/.kaggle/kaggle.json
-          chmod 600 ~/.kaggle/kaggle.json
-          
           # Replace 'main' with the actual commit SHA to bypass cache
           sed -i "s/main\/dataset.json/${{ github.sha }}\/dataset.json/g" train.ipynb
           
