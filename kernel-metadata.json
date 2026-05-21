@@ -1,12 +1,16 @@
 {
-    "id": "youmei1/deaize-training-infrastructure",
-    "title": "deaize-training-infrastructure",
-    "code_file": "train.ipynb",
-    "language": "python",
-    "kernel_type": "notebook",
-    "is_private": "true",
-    "enable_internet": "true",
-    "dataset_sources": [],
-    "competition_sources": [],
-    "kernel_sources": []
+  "id": "youmei1/deaize-training-infrastructure",
+  "title": "deaize-training-infrastructure",
+  "code_file": "train.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
 }
