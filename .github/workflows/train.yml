@@ -36,17 +36,17 @@ jobs:
           sed -i "s/main\/dataset.json/${{ github.sha }}\/dataset.json/g" train.ipynb
           
           # Verify Kaggle CLI version and help (for debugging)
-          python3 -m kaggle kernels push -h
+          kaggle kernels push -h
           
           # Push the kernel to Kaggle requesting the T4 x2 accelerator
-          python3 -m kaggle kernels push -p . --accelerator T4x2
+          kaggle kernels push -p . --accelerator T4x2
           
           echo "Waiting for Kaggle kernel to queue..."
           sleep 30
           
           # Poll the status of the Kaggle kernel
           while true; do
-            STATUS=$(python3 -m kaggle kernels status youmei1/deaize-training-infrastructure)
+            STATUS=$(kaggle kernels status youmei1/deaize-training-infrastructure)
             echo "$STATUS"
             if [[ "$STATUS" == *"complete"* ]]; then
               echo "Kernel finished successfully."
