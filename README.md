@@ -27,6 +27,11 @@ Here is how the pipeline works:
 3. **Fine-Tuning:** The Kaggle container runs `train.ipynb`, which loads the base model (`Qwen/Qwen2.5-3B-Instruct`), applies LoRA (Low-Rank Adaptation) via the `peft` library, and trains the model in FP16 precision using the `trl` library's `SFTTrainer`.
 4. **Deployment (Hugging Face):** Once training completes, the notebook automatically uploads the finalized LoRA adapter weights directly to the Hugging Face Model Hub.
 
+## Model Purpose & Dataset Details
+* **Objective:** The specific goal of this fine-tuned model is to edit AI-generated text to match my own personal writing style. It is designed to remove "robotic AI-isms" and repetitive transitions, making the text sound naturally like *me*. Because of this highly personalized goal, the output is not meant to be strictly "professional" or suitable for general-purpose use.
+* **Target Language:** The dataset and model outputs are entirely in **Vietnamese**, tailored specifically for Vietnamese users and text.
+* **Dataset Status:** The training data (`dataset.json`) is entirely hand-crafted by me based on my own writing. Currently, it contains only a small number of examples as a proof-of-concept for the pipeline. I will be gradually adding more examples over time to continuously improve the model's ability to capture my unique voice.
+
 ## Links & Resources
 * **Kaggle Notebook / Execution Logs:** [deaize-training-infrastructure](https://www.kaggle.com/code/youmei1/deaize-training-infrastructure)
 * **Hugging Face Model (Adapters):** [Youmei295/deAIze](https://huggingface.co/Youmei295/deAIze)
