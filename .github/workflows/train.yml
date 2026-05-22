@@ -45,10 +45,10 @@ jobs:
           while true; do
             STATUS=$(kaggle kernels status youmei1/deaize-training-infrastructure)
             echo "$STATUS"
-            if [[ "$STATUS" == *"complete"* ]]; then
+            if [[ "$STATUS" == *"complete"* || "$STATUS" == *"COMPLETE"* ]]; then
               echo "Kernel finished successfully."
               exit 0
-            elif [[ "$STATUS" == *"error"* || "$STATUS" == *"ERROR"* || "$STATUS" == *"cancel"* || "$STATUS" == *"fatal"* ]]; then
+            elif [[ "$STATUS" == *"error"* || "$STATUS" == *"ERROR"* || "$STATUS" == *"cancel"* || "$STATUS" == *"CANCEL"* || "$STATUS" == *"fatal"* ]]; then
               echo "Kernel failed or was cancelled!"
               exit 1
             fi
