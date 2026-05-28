@@ -35,3 +35,10 @@ Here is how the pipeline works:
 ## Links & Resources
 * **Kaggle Notebook / Execution Logs:** [deaize-training-infrastructure](https://www.kaggle.com/code/youmei1/deaize-training-infrastructure)
 * **Hugging Face Model (Adapters):** [Youmei295/deAIze](https://huggingface.co/Youmei295/deAIze)
+
+## Automated Evaluation Loop
+As part of the continuous training pipeline, the Kaggle notebook will automatically test the newly tuned LoRA adapter against a fixed example prompt immediately after training completes.
+
+The result is then automatically pushed back to this GitHub repository into the `logs/` directory using the GitHub API. This provides a clear, version-controlled history of how the model's output on a baseline prompt evolves over time across multiple retuning iterations.
+
+**Note:** For this to work, a `GITHUB_TOKEN` must be added to your Kaggle account's **Secrets** (attached to the notebook).
